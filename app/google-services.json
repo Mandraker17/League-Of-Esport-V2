@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "63408926970",
+    "firebase_url": "https://leagueofesportv2.firebaseio.com",
+    "project_id": "leagueofesportv2",
+    "storage_bucket": "leagueofesportv2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63408926970:android:ca5d2b26ff8b3c28",
+        "android_client_info": {
+          "package_name": "fr.cdsm.leagueofesportv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63408926970-59995hj267roe3jcmaop2qckbun7j0p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDFRZW9dhX32dmp_6ifnuGYWoenxxVMXU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
