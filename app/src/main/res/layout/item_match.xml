@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/draw"
+    android:clickable="true"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/img_team1_match"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/Description_Match_Team1"
+        app:srcCompat="@drawable/unicorns_logo"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/txt_score1_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/score_match_team1"
+        android:textSize="18sp"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/txt_separation"
+        android:layout_width="2.5dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/draw" />
+
+    <TextView
+        android:id="@+id/txt_score2_match"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/Score_match_team2"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/img_team2_match"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:contentDescription="@string/Description_Match_Team2"
+        app:srcCompat="@drawable/fnatic_logo" />
+</LinearLayout>

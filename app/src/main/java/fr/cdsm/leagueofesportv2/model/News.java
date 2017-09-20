@@ -1,4 +1,4 @@
-package fr.cdsm.leagueofesportv2;
+package fr.cdsm.leagueofesportv2.model;
 
 import com.google.firebase.database.Exclude;
 

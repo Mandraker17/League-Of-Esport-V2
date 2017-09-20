@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">League Of Esport V2</string>
+    <string name="temp_region_liste_equipe">Exemple Region</string>
+    <string name="score_match_team1">Score</string>
+    <string name="Score_match_team2">Score</string>
+    <string name="Description_Match_Team1">Logo Equipe 1</string>
+    <string name="Description_Match_Team2">Logo Equipe 2</string>
+    <string name="progress_dialog">Progress Dialog</string>
+    <string name="please_wait">Please wait…</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="image_equipe_1">image equipe 1</string>
+    <string name="image_equipe_2">image equipe 2</string>
+    <string name="perdant">Perdant</string>
+    <string name="vainqueur">Vainqueur</string>
+    <string name="win_lose">Win/Lose</string>
+    <string name="Result_Champ1">Image Champion 1</string>
+    <string name="Result_Champ2">Image Champion 1</string>
+    <string name="Result_Pseudo1">Texte Pseudo 1</string>
+    <string name="Result_Pseudo2">Texte Pseudo 1</string>
+    <string name="classement_lcs_eu">Classement LCS EU</string>
+    <string-array name="items">
+        <item>Accueil</item>
+        <item>Liste</item>
+        <item>Authentification</item>
+    </string-array>
 </resources>
