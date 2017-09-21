@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.cdsm.leagueofesportv2.interfaces.MatchAdapterListener;
+import fr.cdsm.leagueofesportv2.model.Best_Of;
 import fr.cdsm.leagueofesportv2.model.Match;
 import fr.cdsm.leagueofesportv2.viewholder.MatchViewHolder;
 import fr.cdsm.leagueofesportv2.model.News;
@@ -21,10 +22,10 @@ import fr.cdsm.leagueofesportv2.R;
 public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public MaterialDialog material;
-    ArrayList<Match> arrayListMatch = new ArrayList<>();
+    ArrayList<Best_Of> arrayListMatch = new ArrayList<Best_Of>();
     MatchAdapterListener listener;
 
-    public MatchAdapter(MaterialDialog material, ArrayList<Match> arrayListMatch, MatchAdapterListener listener) {
+    public MatchAdapter(MaterialDialog material, ArrayList<Best_Of> arrayListMatch, MatchAdapterListener listener) {
         this.material = material;
         this.arrayListMatch = arrayListMatch;
         this.listener = listener;
@@ -38,11 +39,11 @@ public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((MatchViewHolder) holder).textescoreTeam1.setText(arrayListMatch.get(position).team1.score);
-        ((MatchViewHolder) holder).textescoreTeam2.setText(arrayListMatch.get(position).team2.score);
+        ((MatchViewHolder) holder).textescoreTeam1.setText(arrayListMatch.get(position).score_final_team1);
+        ((MatchViewHolder) holder).textescoreTeam2.setText(arrayListMatch.get(position).score_final_team2);
 
-        Picasso.with(((MatchViewHolder) holder).imageTeam1.getContext()).load(arrayListMatch.get(position).team1.image).fit().centerInside().into(((MatchViewHolder) holder).imageTeam1);
-        Picasso.with(((MatchViewHolder) holder).imageTeam2.getContext()).load(arrayListMatch.get(position).team2.image).fit().centerInside().into(((MatchViewHolder) holder).imageTeam2);
+        Picasso.with(((MatchViewHolder) holder).imageTeam1.getContext()).load(arrayListMatch.get(position).image_team1).fit().centerInside().into(((MatchViewHolder) holder).imageTeam1);
+        Picasso.with(((MatchViewHolder) holder).imageTeam2.getContext()).load(arrayListMatch.get(position).image_team2).fit().centerInside().into(((MatchViewHolder) holder).imageTeam2);
 
         holder.itemView.setOnClickListener(new View.OnClickListener(){
             @Override

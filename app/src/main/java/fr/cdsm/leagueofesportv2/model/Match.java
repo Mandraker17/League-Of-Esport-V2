@@ -1,5 +1,8 @@
 package fr.cdsm.leagueofesportv2.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -20,6 +23,7 @@ public class Match {
         this.team2 = equipe2;
     }
 
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -28,4 +32,5 @@ public class Match {
         result.put("team2", team2);
         return result;
     }
+
 }
