@@ -10,13 +10,10 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import fr.cdsm.leagueofesportv2.interfaces.MatchAdapterListener;
 import fr.cdsm.leagueofesportv2.model.Best_Of;
-import fr.cdsm.leagueofesportv2.model.Match;
 import fr.cdsm.leagueofesportv2.viewholder.MatchViewHolder;
-import fr.cdsm.leagueofesportv2.model.News;
 import fr.cdsm.leagueofesportv2.R;
 
 public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -45,7 +42,7 @@ public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         Picasso.with(((MatchViewHolder) holder).imageTeam1.getContext()).load(arrayListMatch.get(position).image_team1).fit().centerInside().into(((MatchViewHolder) holder).imageTeam1);
         Picasso.with(((MatchViewHolder) holder).imageTeam2.getContext()).load(arrayListMatch.get(position).image_team2).fit().centerInside().into(((MatchViewHolder) holder).imageTeam2);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onMatchClick();

@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,7 +26,6 @@ public class ResultatActivity extends AppCompatActivity {
     Match rencontre;
     DatabaseReference newsDatabase = FirebaseDatabase.getInstance().getReference();
     ArrayList<Match> arrayListMatch = new ArrayList<Match>();
-
     private PagerAdapter mPagerAdapter;
     private ViewPager mPager;
     int temp;
@@ -38,7 +36,7 @@ public class ResultatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultat);
 
         Intent intent = getIntent();
-        temp = intent.getIntExtra("size",1);
+        temp = intent.getIntExtra("size", 1);
         getData();
 
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -55,6 +53,7 @@ public class ResultatActivity extends AppCompatActivity {
                     arrayListMatch.add(rencontre);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -79,7 +78,7 @@ public class ResultatActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle args = new Bundle();
-            args.putInt("0",position);
+            args.putInt("0", position);
             FragmentResultatSlide fragment = new FragmentResultatSlide();
             fragment.setArguments(args);
             return fragment;

@@ -1,8 +1,5 @@
 package fr.cdsm.leagueofesportv2.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -10,14 +7,14 @@ import java.util.Map;
 
 public class Match {
 
-    public EquipeMatch team1;
-    public EquipeMatch team2;
+    public Equipe team1;
+    public Equipe team2;
 
     public Match() {
         //Constructeur par défaut
     }
 
-    public Match(EquipeMatch equipe1, EquipeMatch equipe2) {
+    public Match(Equipe equipe1, Equipe equipe2) {
 
         this.team1 = equipe1;
         this.team2 = equipe2;

@@ -13,26 +13,21 @@ public class Best_Of {
 
     public String score_final_team1;
     public String score_final_team2;
-    public Match match1;
-    public Match match2;
-    public Match match3;
     public String image_team1;
     public String image_team2;
+    public ListeMatch data_match;
 
-    public Best_Of () {
+    public Best_Of() {
 
     }
 
-    public Best_Of(String score_final_equipe1, String score_final_equipe2, Match combat1, Match combat2, Match combat3, String image_equipe1, String image_equipe2 ) {
+    public Best_Of(String score_final_equipe1, String score_final_equipe2, String image_equipe1, String image_equipe2, ListeMatch liste_data_match) {
         this.score_final_team1 = score_final_equipe1;
         this.score_final_team2 = score_final_equipe2;
-
         this.image_team1 = image_equipe1;
         this.image_team2 = image_equipe2;
+        this.data_match = liste_data_match;
 
-        this.match1 = combat1;
-        this.match2 = combat2;
-        this.match3 = combat3;
     }
 
     @Exclude
@@ -43,10 +38,7 @@ public class Best_Of {
         result.put("score_final_team2", score_final_team2);
         result.put("image_team1", image_team1);
         result.put("image_team2", image_team2);
-        result.put("match1", match1);
-        result.put("match2", match2);
-        result.put("match3", match3);
-
+        result.put("data_match", data_match);
         return result;
     }
 }

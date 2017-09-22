@@ -5,7 +5,7 @@ import com.google.firebase.database.Exclude;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EquipeMatch {
+public class Equipe {
 
     public String score;
     public Joueur player1;
@@ -14,11 +14,11 @@ public class EquipeMatch {
     public Joueur player4;
     public Joueur player5;
 
-    public EquipeMatch() {
+    public Equipe() {
 
     }
 
-    public EquipeMatch(String score_fin, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, Joueur joueur5) {
+    public Equipe(String score_fin, Joueur joueur1, Joueur joueur2, Joueur joueur3, Joueur joueur4, Joueur joueur5) {
         this.score = score_fin;
         this.player1 = joueur1;
         this.player2 = joueur2;
