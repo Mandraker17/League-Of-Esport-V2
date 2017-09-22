@@ -2,6 +2,7 @@ package fr.cdsm.leagueofesportv2.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class Equipe {
         this.player3 = joueur3;
         this.player4 = joueur4;
         this.player5 = joueur5;
+
     }
 
     @Exclude

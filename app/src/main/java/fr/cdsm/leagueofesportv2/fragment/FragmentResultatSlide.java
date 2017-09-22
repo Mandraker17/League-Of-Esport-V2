@@ -29,6 +29,8 @@ import fr.cdsm.leagueofesportv2.model.Match;
 
 public class FragmentResultatSlide extends Fragment {
 
+    Match match_test;
+    ArrayList<Match> data_match_test = new ArrayList<Match>();
     Best_Of rencontre;
     DatabaseReference newsDatabase = FirebaseDatabase.getInstance().getReference();
     ArrayList<Best_Of> arrayListMatch = new ArrayList<Best_Of>();
@@ -37,7 +39,8 @@ public class FragmentResultatSlide extends Fragment {
     RecyclerView.Adapter mAdapter;
     int position;
     ImageView image1, image2;
-    Match test;
+    String temp;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,35 +66,48 @@ public class FragmentResultatSlide extends Fragment {
         newsDatabase.child("Rencontre").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot match : dataSnapshot.getChildren()) {
-                    rencontre = match.getValue(Best_Of.class);
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    rencontre = data.getValue(Best_Of.class);
                     arrayListMatch.add(rencontre);
+                    temp = data.getKey();
                 }
+                newsDatabase.child("Rencontre").child(temp).child("data_match").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            match_test = data.getValue(Match.class);
+                            data_match_test.add(match_test);
 
-                MatchAdapterListener listener = new MatchAdapterListener() {
-                    public void onMatchClick() {
-                        Intent intent = new Intent(getActivity(), ResultatActivity.class);
-                        intent.putExtra("size", arrayListMatch.size());
-                        startActivity(intent);
+                        }
+
+                        Picasso.with(getActivity()).load(arrayListMatch.get(position).image_team1).into(image1);
+                        Picasso.with(getActivity()).load(arrayListMatch.get(position).image_team2).into(image2);
+
+                        MatchAdapterListener listener = new MatchAdapterListener() {
+                            public void onMatchClick() {
+                                Intent intent = new Intent(getActivity(), ResultatActivity.class);
+                                intent.putExtra("size", arrayListMatch.size());
+                                startActivity(intent);
+                            }
+                        };
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                        mRecyclerView.setLayoutManager(linearLayoutManager);
+                        mAdapter = new ResultatAdapter(material, data_match_test, listener);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
                     }
-                };
 
-                Picasso.with(getActivity()).load(arrayListMatch.get(position).image_team1).into(image1);
-                Picasso.with(getActivity()).load(arrayListMatch.get(position).image_team2).into(image2);
-
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                mRecyclerView.setLayoutManager(linearLayoutManager);
-                mAdapter = new ResultatAdapter(material, arrayListMatch, listener);
-                mRecyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
     }
-
-
-
 }

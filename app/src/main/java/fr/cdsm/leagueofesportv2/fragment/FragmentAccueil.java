@@ -34,6 +34,7 @@ public class FragmentAccueil extends android.app.Fragment {
     public MaterialDialog material;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
+    FragmentTransaction fragmentTransaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,10 +59,11 @@ public class FragmentAccueil extends android.app.Fragment {
                     rencontre = match.getValue(Best_Of.class);
                     arrayListMatch.add(rencontre);
                 }
+
                 MatchAdapterListener listener = new MatchAdapterListener() {
                     public void onMatchClick() {
                         Intent intent = new Intent(getActivity(), ResultatActivity.class);
-                        intent.putExtra("size", arrayListMatch.size());
+                        intent.putExtra("size",arrayListMatch.size());
                         startActivity(intent);
                     }
                 };

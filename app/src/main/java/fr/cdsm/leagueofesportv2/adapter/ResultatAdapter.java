@@ -12,15 +12,16 @@ import java.util.ArrayList;
 import fr.cdsm.leagueofesportv2.R;
 import fr.cdsm.leagueofesportv2.interfaces.MatchAdapterListener;
 import fr.cdsm.leagueofesportv2.model.Best_Of;
+import fr.cdsm.leagueofesportv2.model.Match;
 import fr.cdsm.leagueofesportv2.viewholder.ResultatViewHolder;
 
 public class ResultatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public MaterialDialog material;
-    ArrayList<Best_Of> arrayListMatch = new ArrayList<Best_Of>();
+    ArrayList<Match> arrayListMatch = new ArrayList<Match>();
     MatchAdapterListener listener;
 
-    public ResultatAdapter(MaterialDialog material, ArrayList<Best_Of> arrayListMatch, MatchAdapterListener listener) {
+    public ResultatAdapter(MaterialDialog material, ArrayList<Match> arrayListMatch, MatchAdapterListener listener) {
         this.material = material;
         this.arrayListMatch = arrayListMatch;
         this.listener = listener;
@@ -34,8 +35,8 @@ public class ResultatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((ResultatViewHolder) holder).texteResultPseudo1.setText(arrayListMatch.get(position).data_match.match1.team1.player1.pseudo);
-        ((ResultatViewHolder) holder).texteResultPseudo1.setText(arrayListMatch.get(position).data_match.match1.team2.player1.pseudo);
+        ((ResultatViewHolder) holder).texteResultPseudo1.setText(arrayListMatch.get(position).team1.player1.pseudo);
+        ((ResultatViewHolder) holder).texteResultPseudo1.setText(arrayListMatch.get(position).team1.player1.pseudo);
         material.cancel();
     }
 
