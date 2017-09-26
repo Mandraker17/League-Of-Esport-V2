@@ -3,6 +3,7 @@ package fr.cdsm.leagueofesportv2.activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,47 +15,25 @@ import android.widget.ListView;
 import fr.cdsm.leagueofesportv2.R;
 import fr.cdsm.leagueofesportv2.fragment.FragmentAccueil;
 import fr.cdsm.leagueofesportv2.fragment.FragmentListe;
+import gr.net.maroulis.library.EasySplashScreen;
 
 public class MainActivity extends AppCompatActivity {
 
-    String[] drawerItemsList;
-    ListView myDrawer;
-    DrawerLayout drawerLayout;
-    Fragment fr;
-    FragmentManager fm = getFragmentManager();
-    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawerItemsList = getResources().getStringArray(R.array.items);
-        myDrawer = (ListView) findViewById(R.id.my_drawer);
-        myDrawer.setAdapter(new ArrayAdapter<String>(this, R.layout.item_drawer, drawerItemsList));
-        myDrawer.setOnItemClickListener(new MyDrawerItemClickListener());
+        EasySplashScreen config = new EasySplashScreen(MainActivity.this)
+                .withFullScreen()
+                .withTargetActivity(MatchFilActivity.class)
+                .withSplashTimeOut(3000)
+                .withBackgroundResource(R.color.back_splash)
+                .withLogo(R.drawable.icon);
+
+        //finally create the view
+        View easySplashScreenView = config.create();
+        setContentView(easySplashScreenView);
+
     }
-
-    private class MyDrawerItemClickListener implements ListView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            switch (position) {
-                case 0:
-                    fr = new FragmentAccueil();
-                    break;
-
-                case 1:
-                    fr = new FragmentListe();
-                    break;
-
-            }
-            fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_main, fr);
-            fragmentTransaction.commit();
-            drawerLayout.closeDrawer(myDrawer);
-        }
-    }
-
 }

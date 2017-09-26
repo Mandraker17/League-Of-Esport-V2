@@ -39,8 +39,10 @@ public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ((MatchViewHolder) holder).textescoreTeam1.setText(arrayListMatch.get(position).score_final_team1);
         ((MatchViewHolder) holder).textescoreTeam2.setText(arrayListMatch.get(position).score_final_team2);
 
-        Picasso.with(((MatchViewHolder) holder).imageTeam1.getContext()).load(arrayListMatch.get(position).image_team1).fit().centerInside().into(((MatchViewHolder) holder).imageTeam1);
-        Picasso.with(((MatchViewHolder) holder).imageTeam2.getContext()).load(arrayListMatch.get(position).image_team2).fit().centerInside().into(((MatchViewHolder) holder).imageTeam2);
+        Picasso.with(((MatchViewHolder) holder).imageTeam1.getContext()).load(arrayListMatch.get(position).image_team1)
+                .fit().centerInside().into(((MatchViewHolder) holder).imageTeam1);
+        Picasso.with(((MatchViewHolder) holder).imageTeam2.getContext()).load(arrayListMatch.get(position).image_team2)
+                .fit().centerInside().into(((MatchViewHolder) holder).imageTeam2);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +50,6 @@ public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 listener.onMatchClick();
             }
         });
-
         material.cancel();
     }
 

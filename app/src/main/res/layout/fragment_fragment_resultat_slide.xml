@@ -1,6 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/rv_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,7 +30,6 @@
 
         <ImageView
             android:id="@+id/img_result_team1"
-            app:srcCompat="@drawable/fnatic_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignLeft="@+id/rv_result"
@@ -37,18 +37,19 @@
             android:layout_alignStart="@+id/rv_result"
             android:layout_marginLeft="41dp"
             android:layout_marginStart="41dp"
-            android:layout_marginTop="27dp" />
+            android:layout_marginTop="27dp"
+            app:srcCompat="@drawable/fnatic_logo" />
 
         <ImageView
             android:id="@+id/img_result_team2"
-            app:srcCompat="@drawable/fnatic_logo"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_alignEnd="@+id/rv_result"
             android:layout_alignRight="@+id/rv_result"
             android:layout_alignTop="@+id/img_result_team1"
             android:layout_marginEnd="41dp"
-            android:layout_marginRight="41dp" />
+            android:layout_marginRight="41dp"
+            app:srcCompat="@drawable/fnatic_logo" />
 
         <TextView
             android:id="@+id/txt_winlose_team1"

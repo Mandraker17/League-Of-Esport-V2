@@ -1,6 +1,5 @@
 package fr.cdsm.leagueofesportv2.fragment;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,11 +18,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import fr.cdsm.leagueofesportv2.activity.ResultatActivity;
+import fr.cdsm.leagueofesportv2.adapter.ClassementAdapter;
 import fr.cdsm.leagueofesportv2.adapter.MatchAdapter;
 import fr.cdsm.leagueofesportv2.interfaces.MatchAdapterListener;
 import fr.cdsm.leagueofesportv2.model.Best_Of;
-import fr.cdsm.leagueofesportv2.model.Match;
-import fr.cdsm.leagueofesportv2.model.News;
+import fr.cdsm.leagueofesportv2.model.Classement;
 import fr.cdsm.leagueofesportv2.R;
 
 public class FragmentAccueil extends android.app.Fragment {
@@ -31,24 +30,53 @@ public class FragmentAccueil extends android.app.Fragment {
     Best_Of rencontre;
     DatabaseReference newsDatabase = FirebaseDatabase.getInstance().getReference();
     ArrayList<Best_Of> arrayListMatch = new ArrayList<Best_Of>();
+    ArrayList<Classement> arrayListClassement = new ArrayList<Classement>();
     public MaterialDialog material;
-    RecyclerView mRecyclerView;
+    RecyclerView mRecyclerViewMatch;
+    RecyclerView mRecyclerViewRank;
     RecyclerView.Adapter mAdapter;
-    FragmentTransaction fragmentTransaction;
+    Classement classement;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_accueil, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.rv_match);
+        mRecyclerViewMatch = (RecyclerView) rootView.findViewById(R.id.rv_match);
+        mRecyclerViewRank = (RecyclerView) rootView.findViewById(R.id.rv_rank);
 
         material = new MaterialDialog.Builder(getActivity())
-                .title(R.string.progress_dialog)
-                .content(R.string.please_wait)
+                .title("Chargement des données")
+                .content("Veuillez Attendre")
                 .progress(true, 0)
                 .show();
 
         getData();
+        getDataClassement();
         return rootView;
+    }
+
+    private void getDataClassement() {
+        newsDatabase.child("Classement").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot match : dataSnapshot.getChildren()) {
+                    classement = match.getValue(Classement.class);
+                    arrayListClassement.add(classement);
+                }
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerViewRank.setLayoutManager(linearLayoutManager);
+                mAdapter = new ClassementAdapter(arrayListClassement);
+                mRecyclerViewRank.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                material = new MaterialDialog.Builder(getActivity())
+                        .title("ERROR")
+                        .content("Classement")
+                        .progress(true, 0)
+                        .show();
+            }
+        });
     }
 
     private void getData() {
@@ -63,15 +91,15 @@ public class FragmentAccueil extends android.app.Fragment {
                 MatchAdapterListener listener = new MatchAdapterListener() {
                     public void onMatchClick() {
                         Intent intent = new Intent(getActivity(), ResultatActivity.class);
-                        intent.putExtra("size",arrayListMatch.size());
+                        intent.putExtra("size", arrayListMatch.size());
                         startActivity(intent);
                     }
                 };
 
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                mRecyclerView.setLayoutManager(linearLayoutManager);
+                mRecyclerViewMatch.setLayoutManager(linearLayoutManager);
                 mAdapter = new MatchAdapter(material, arrayListMatch, listener);
-                mRecyclerView.setAdapter(mAdapter);
+                mRecyclerViewMatch.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -79,10 +107,12 @@ public class FragmentAccueil extends android.app.Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 material = new MaterialDialog.Builder(getActivity())
                         .title("ERROR")
-                        .content("ERROR")
+                        .content("Match")
                         .progress(true, 0)
                         .show();
             }
         });
     }
+
+
 }
