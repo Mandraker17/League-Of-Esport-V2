@@ -20,16 +20,21 @@ import java.util.ArrayList;
 
 import fr.cdsm.leagueofesportv2.R;
 import fr.cdsm.leagueofesportv2.fragment.FragmentResultatSlide;
+import fr.cdsm.leagueofesportv2.model.Best_Of;
 import fr.cdsm.leagueofesportv2.model.ListeMatch;
 import fr.cdsm.leagueofesportv2.model.Match;
 
 public class ResultatActivity extends AppCompatActivity {
 
-    Match rencontre;
+    Best_Of rencontre;
     DatabaseReference newsDatabase = FirebaseDatabase.getInstance().getReference();
-    ArrayList<Match> arrayListMatch = new ArrayList<Match>();
+    ArrayList<Best_Of> arrayListMatch = new ArrayList<Best_Of>();
     private PagerAdapter mPagerAdapter;
     private ViewPager mPager;
+    int temp_position;
+    int test = 0;
+    public int nombre_pages;
+    String test1, test2;
     int temp;
 
     @Override
@@ -38,23 +43,33 @@ public class ResultatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultat);
 
         Intent intent = getIntent();
-        temp = intent.getIntExtra("size",1);
+        temp_position = intent.getIntExtra("position", 0);
+        nombre_pages = intent.getIntExtra("count_pagers", 1);
+
         getData();
 
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
     }
 
     private void getData() {
+        temp_position++;
         newsDatabase.child("Rencontre").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot match : dataSnapshot.getChildren()) {
-                    rencontre = match.getValue(Match.class);
-                    arrayListMatch.add(rencontre);
+                    test = Integer.valueOf(match.getKey());
+                    if (test == temp_position) {
+                        rencontre = match.getValue(Best_Of.class);
+                        arrayListMatch.add(rencontre);
+                    }
                 }
+                test1 = arrayListMatch.get(0).image_team1;
+                test2 = arrayListMatch.get(0).image_team2;
+                mPager = (ViewPager) findViewById(R.id.pager);
+                mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+                mPager.setAdapter(mPagerAdapter);
+
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -79,7 +94,10 @@ public class ResultatActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             Bundle args = new Bundle();
-            args.putInt("0",position);
+            args.putInt("0", position);
+            args.putInt("1", temp_position);
+            args.putString("test1",test1);
+            args.putString("test2",test2);
             FragmentResultatSlide fragment = new FragmentResultatSlide();
             fragment.setArguments(args);
             return fragment;
@@ -87,7 +105,7 @@ public class ResultatActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return temp;
+            return nombre_pages;
         }
     }
 }

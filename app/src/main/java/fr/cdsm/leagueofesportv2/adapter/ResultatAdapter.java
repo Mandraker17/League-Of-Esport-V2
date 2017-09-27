@@ -21,10 +21,9 @@ public class ResultatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     ArrayList<Match> arrayListMatch = new ArrayList<Match>();
     MatchAdapterListener listener;
 
-    public ResultatAdapter(MaterialDialog material, ArrayList<Match> arrayListMatch, MatchAdapterListener listener) {
+    public ResultatAdapter(MaterialDialog material, ArrayList<Match> arrayListMatch) {
         this.material = material;
         this.arrayListMatch = arrayListMatch;
-        this.listener = listener;
     }
 
     @Override

@@ -4,8 +4,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fr.cdsm.leagueofesportv2.R;
+import fr.cdsm.leagueofesportv2.activity.MatchFilActivity;
+import fr.cdsm.leagueofesportv2.fragment.FragmentAccueil;
 
 
 public class MatchViewHolder extends RecyclerView.ViewHolder {
@@ -23,6 +26,6 @@ public class MatchViewHolder extends RecyclerView.ViewHolder {
         imageTeam2 = (ImageView) itemView.findViewById(R.id.img_team2_match);
         textescoreTeam1 = (TextView) itemView.findViewById(R.id.txt_score1_match);
         textescoreTeam2 = (TextView) itemView.findViewById(R.id.txt_score2_match);
-
     }
+
 }

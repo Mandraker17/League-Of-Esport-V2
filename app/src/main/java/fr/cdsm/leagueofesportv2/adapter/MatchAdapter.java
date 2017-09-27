@@ -21,6 +21,7 @@ public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public MaterialDialog material;
     ArrayList<Best_Of> arrayListMatch = new ArrayList<Best_Of>();
     MatchAdapterListener listener;
+    int position;
 
     public MatchAdapter(MaterialDialog material, ArrayList<Best_Of> arrayListMatch, MatchAdapterListener listener) {
         this.material = material;
@@ -35,7 +36,7 @@ public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         ((MatchViewHolder) holder).textescoreTeam1.setText(arrayListMatch.get(position).score_final_team1);
         ((MatchViewHolder) holder).textescoreTeam2.setText(arrayListMatch.get(position).score_final_team2);
 
@@ -43,11 +44,10 @@ public class MatchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 .fit().centerInside().into(((MatchViewHolder) holder).imageTeam1);
         Picasso.with(((MatchViewHolder) holder).imageTeam2.getContext()).load(arrayListMatch.get(position).image_team2)
                 .fit().centerInside().into(((MatchViewHolder) holder).imageTeam2);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onMatchClick();
+                listener.onMatchClick(position);
             }
         });
         material.cancel();

@@ -21,6 +21,7 @@ import fr.cdsm.leagueofesportv2.activity.ResultatActivity;
 import fr.cdsm.leagueofesportv2.adapter.ClassementAdapter;
 import fr.cdsm.leagueofesportv2.adapter.MatchAdapter;
 import fr.cdsm.leagueofesportv2.interfaces.MatchAdapterListener;
+import fr.cdsm.leagueofesportv2.interfaces.RecyclerViewClickListener;
 import fr.cdsm.leagueofesportv2.model.Best_Of;
 import fr.cdsm.leagueofesportv2.model.Classement;
 import fr.cdsm.leagueofesportv2.R;
@@ -36,6 +37,7 @@ public class FragmentAccueil extends android.app.Fragment {
     RecyclerView mRecyclerViewRank;
     RecyclerView.Adapter mAdapter;
     Classement classement;
+    int count_pagers;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,6 +70,7 @@ public class FragmentAccueil extends android.app.Fragment {
                 mRecyclerViewRank.setAdapter(mAdapter);
                 mAdapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 material = new MaterialDialog.Builder(getActivity())
@@ -89,9 +92,12 @@ public class FragmentAccueil extends android.app.Fragment {
                 }
 
                 MatchAdapterListener listener = new MatchAdapterListener() {
-                    public void onMatchClick() {
+                    @Override
+                    public void onMatchClick(int position) {
+                        count_pagers = (Integer.valueOf(arrayListMatch.get(position).score_final_team1) + Integer.valueOf(arrayListMatch.get(position).score_final_team2));
                         Intent intent = new Intent(getActivity(), ResultatActivity.class);
-                        intent.putExtra("size", arrayListMatch.size());
+                        intent.putExtra("position", position);
+                        intent.putExtra("count_pagers", count_pagers);
                         startActivity(intent);
                     }
                 };
@@ -113,6 +119,4 @@ public class FragmentAccueil extends android.app.Fragment {
             }
         });
     }
-
-
 }

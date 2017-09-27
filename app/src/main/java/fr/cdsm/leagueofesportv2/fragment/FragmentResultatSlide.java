@@ -25,21 +25,22 @@ import fr.cdsm.leagueofesportv2.activity.ResultatActivity;
 import fr.cdsm.leagueofesportv2.adapter.ResultatAdapter;
 import fr.cdsm.leagueofesportv2.interfaces.MatchAdapterListener;
 import fr.cdsm.leagueofesportv2.model.Best_Of;
+import fr.cdsm.leagueofesportv2.model.Joueur;
 import fr.cdsm.leagueofesportv2.model.Match;
 
 public class FragmentResultatSlide extends Fragment {
 
     Match match_test;
     ArrayList<Match> data_match_test = new ArrayList<Match>();
-    Best_Of rencontre;
     DatabaseReference newsDatabase = FirebaseDatabase.getInstance().getReference();
-    ArrayList<Best_Of> arrayListMatch = new ArrayList<Best_Of>();
     public MaterialDialog material;
     RecyclerView mRecyclerView;
     RecyclerView.Adapter mAdapter;
-    int position;
+    int position, temp_position;
     ImageView image1, image2;
-    String temp;
+    String url_image1, url_image2;
+    Joueur player;
+    ArrayList<Joueur> data_array_player = new ArrayList<Joueur>();
 
 
     @Override
@@ -51,10 +52,13 @@ public class FragmentResultatSlide extends Fragment {
 
         Bundle args = getArguments();
         position = args.getInt("0");
+        temp_position = args.getInt("1");
+        url_image1 = args.getString("test1");
+        url_image2 = args.getString("test2");
 
         material = new MaterialDialog.Builder(getActivity())
                 .title(R.string.progress_dialog)
-                .content(R.string.please_wait)
+                .content("RecyclerView")
                 .progress(true, 0)
                 .show();
 
@@ -63,51 +67,26 @@ public class FragmentResultatSlide extends Fragment {
     }
 
     private void getData() {
-        newsDatabase.child("Rencontre").addListenerForSingleValueEvent(new ValueEventListener() {
+        newsDatabase.child("Rencontre").child(String.valueOf(temp_position)).child("data_match").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    rencontre = data.getValue(Best_Of.class);
-                    arrayListMatch.add(rencontre);
-                    temp = data.getKey();
+                    match_test = data.getValue(Match.class);
+                    data_match_test.add(match_test);
                 }
-                newsDatabase.child("Rencontre").child(temp).child("data_match").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for (DataSnapshot data : dataSnapshot.getChildren()) {
-                            match_test = data.getValue(Match.class);
-                            data_match_test.add(match_test);
+                Picasso.with(getActivity()).load(url_image1).into(image1);
+                Picasso.with(getActivity()).load(url_image2).into(image2);
 
-                        }
-
-                        Picasso.with(getActivity()).load(arrayListMatch.get(position).image_team1).into(image1);
-                        Picasso.with(getActivity()).load(arrayListMatch.get(position).image_team2).into(image2);
-
-                        MatchAdapterListener listener = new MatchAdapterListener() {
-                            public void onMatchClick() {
-                                Intent intent = new Intent(getActivity(), ResultatActivity.class);
-                                intent.putExtra("size", arrayListMatch.size());
-                                startActivity(intent);
-                            }
-                        };
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        mRecyclerView.setLayoutManager(linearLayoutManager);
-                        mAdapter = new ResultatAdapter(material, data_match_test, listener);
-                        mRecyclerView.setAdapter(mAdapter);
-                        mAdapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerView.setLayoutManager(linearLayoutManager);
+                mAdapter = new ResultatAdapter(material, data_match_test);
+                mRecyclerView.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
     }
 }
