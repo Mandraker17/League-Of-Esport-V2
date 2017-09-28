@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/txt_border"
             android:layout_width="3dp"
-            android:layout_height="600dp"
+            android:layout_height="560dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:background="@drawable/draw" />

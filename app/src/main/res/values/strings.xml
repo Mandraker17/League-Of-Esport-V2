@@ -20,7 +20,6 @@
     <string name="classement_lcs_eu">Classement LCS EU</string>
     <string-array name="items">
         <item>Accueil</item>
-        <item>Liste</item>
         <item>Authentification</item>
     </string-array>
 </resources>

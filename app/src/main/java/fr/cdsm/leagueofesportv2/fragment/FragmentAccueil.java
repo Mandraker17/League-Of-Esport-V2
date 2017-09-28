@@ -56,32 +56,6 @@ public class FragmentAccueil extends android.app.Fragment {
         return rootView;
     }
 
-    private void getDataClassement() {
-        newsDatabase.child("Classement").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot match : dataSnapshot.getChildren()) {
-                    classement = match.getValue(Classement.class);
-                    arrayListClassement.add(classement);
-                }
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                mRecyclerViewRank.setLayoutManager(linearLayoutManager);
-                mAdapter = new ClassementAdapter(arrayListClassement);
-                mRecyclerViewRank.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                material = new MaterialDialog.Builder(getActivity())
-                        .title("ERROR")
-                        .content("Classement")
-                        .progress(true, 0)
-                        .show();
-            }
-        });
-    }
-
     private void getData() {
         newsDatabase.child("Rencontre").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -119,4 +93,31 @@ public class FragmentAccueil extends android.app.Fragment {
             }
         });
     }
+
+    private void getDataClassement() {
+        newsDatabase.child("Classement").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot match : dataSnapshot.getChildren()) {
+                    classement = match.getValue(Classement.class);
+                    arrayListClassement.add(classement);
+                }
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                mRecyclerViewRank.setLayoutManager(linearLayoutManager);
+                mAdapter = new ClassementAdapter(arrayListClassement);
+                mRecyclerViewRank.setAdapter(mAdapter);
+                mAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                material = new MaterialDialog.Builder(getActivity())
+                        .title("ERROR")
+                        .content("Classement")
+                        .progress(true, 0)
+                        .show();
+            }
+        });
+    }
+
 }

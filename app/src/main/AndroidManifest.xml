@@ -19,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.ResultatActivity" />
-        <activity android:name=".activity.MatchFilActivity"></activity>
+        <activity android:name=".activity.MatchFilActivity" />
+        <activity android:name=".activity.InscriptionActivity" />
+        <activity android:name=".activity.ProfilActivity"></activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.widget.ListView;
 
 import fr.cdsm.leagueofesportv2.R;
 import fr.cdsm.leagueofesportv2.fragment.FragmentAccueil;
+import fr.cdsm.leagueofesportv2.fragment.FragmentAuthentification;
 import fr.cdsm.leagueofesportv2.fragment.FragmentListe;
 
 public class MatchFilActivity extends AppCompatActivity {
@@ -47,7 +48,7 @@ public class MatchFilActivity extends AppCompatActivity {
                     break;
 
                 case 1:
-                    fr = new FragmentListe();
+                    fr = new FragmentAuthentification();
                     break;
 
             }

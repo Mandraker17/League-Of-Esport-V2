@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import fr.cdsm.leagueofesportv2.R;
 import fr.cdsm.leagueofesportv2.fragment.FragmentResultatSlide;
 import fr.cdsm.leagueofesportv2.model.Best_Of;
-import fr.cdsm.leagueofesportv2.model.ListeMatch;
-import fr.cdsm.leagueofesportv2.model.Match;
 
 public class ResultatActivity extends AppCompatActivity {
 
@@ -51,7 +49,6 @@ public class ResultatActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        temp_position++;
         newsDatabase.child("Rencontre").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

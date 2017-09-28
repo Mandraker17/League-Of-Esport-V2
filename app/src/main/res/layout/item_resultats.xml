@@ -20,8 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="8dp"
+        android:gravity="center_vertical"
         android:text="@string/Result_Pseudo1"
         tools:ignore="RtlHardcoded,RtlSymmetry" />
 
@@ -31,7 +30,6 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="right|center_vertical"
-        android:paddingRight="8dp"
         android:text="@string/Result_Pseudo2"
         tools:ignore="RtlHardcoded,RtlSymmetry" />
 

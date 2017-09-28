@@ -2,6 +2,7 @@ package fr.cdsm.leagueofesportv2.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,13 +16,13 @@ public class Best_Of {
     public String score_final_team2;
     public String image_team1;
     public String image_team2;
-    public ListeMatch data_match;
+    public ArrayList<Match> data_match;
 
     public Best_Of() {
 
     }
 
-    public Best_Of(String score_final_equipe1, String score_final_equipe2, String image_equipe1, String image_equipe2, ListeMatch liste_data_match) {
+    public Best_Of(String score_final_equipe1, String score_final_equipe2, String image_equipe1, String image_equipe2, ArrayList<Match> liste_data_match) {
         this.score_final_team1 = score_final_equipe1;
         this.score_final_team2 = score_final_equipe2;
         this.image_team1 = image_equipe1;

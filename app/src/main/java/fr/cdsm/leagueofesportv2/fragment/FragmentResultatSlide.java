@@ -40,7 +40,9 @@ public class FragmentResultatSlide extends Fragment {
     ImageView image1, image2;
     String url_image1, url_image2;
     Joueur player;
-    ArrayList<Joueur> data_array_player = new ArrayList<Joueur>();
+    ArrayList<Joueur> data_array_player1 = new ArrayList<Joueur>();
+    ArrayList<Joueur> data_array_player2 = new ArrayList<Joueur>();
+    String test_key;
 
 
     @Override
@@ -77,11 +79,41 @@ public class FragmentResultatSlide extends Fragment {
                 Picasso.with(getActivity()).load(url_image1).into(image1);
                 Picasso.with(getActivity()).load(url_image2).into(image2);
 
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                mRecyclerView.setLayoutManager(linearLayoutManager);
-                mAdapter = new ResultatAdapter(material, data_match_test);
-                mRecyclerView.setAdapter(mAdapter);
-                mAdapter.notifyDataSetChanged();
+                newsDatabase.child("Rencontre").child(String.valueOf(temp_position)).child("data_match").child(String.valueOf(position)).child("team1").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                player = data.getValue(Joueur.class);
+                                data_array_player1.add(player);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                newsDatabase.child("Rencontre").child(String.valueOf(temp_position)).child("data_match").child(String.valueOf(position)).child("team2").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot data : dataSnapshot.getChildren()) {
+                            player = data.getValue(Joueur.class);
+                            data_array_player2.add(player);
+                        }
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                        mRecyclerView.setLayoutManager(linearLayoutManager);
+                        mAdapter = new ResultatAdapter(material, data_match_test, data_array_player1, data_array_player2);
+                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
 
             @Override
