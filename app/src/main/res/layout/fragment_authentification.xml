@@ -42,7 +42,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/et_password_auth"
         android:layout_marginTop="30dp"
-        android:onClick="connexionCompte"
         android:text="Se Connecter" />
 
     <Button
@@ -53,7 +52,6 @@
         android:layout_alignBottom="@+id/btn_auth"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:onClick="goInscription"
         android:text="S'inscrire" />
 
     <Button
@@ -64,7 +62,6 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/btn_auth"
         android:layout_marginTop="30dp"
-        android:onClick="forgotPassword"
         android:text="Mot de Passe Oublié" />
 
 </RelativeLayout>

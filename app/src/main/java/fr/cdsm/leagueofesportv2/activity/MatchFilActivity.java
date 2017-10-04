@@ -14,10 +14,8 @@ import android.widget.ListView;
 import fr.cdsm.leagueofesportv2.R;
 import fr.cdsm.leagueofesportv2.fragment.FragmentAccueil;
 import fr.cdsm.leagueofesportv2.fragment.FragmentAuthentification;
-import fr.cdsm.leagueofesportv2.fragment.FragmentListe;
 
 public class MatchFilActivity extends AppCompatActivity {
-
 
     String[] drawerItemsList;
     ListView myDrawer;
@@ -31,6 +29,7 @@ public class MatchFilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerItemsList = getResources().getStringArray(R.array.items);
         myDrawer = (ListView) findViewById(R.id.my_drawer);
@@ -42,6 +41,7 @@ public class MatchFilActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             switch (position) {
                 case 0:
                     fr = new FragmentAccueil();
@@ -53,7 +53,7 @@ public class MatchFilActivity extends AppCompatActivity {
 
             }
             fragmentTransaction = fm.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_main, fr);
+            fragmentTransaction.replace(R.id.main_fragment_container, fr);
             fragmentTransaction.commit();
             drawerLayout.closeDrawer(myDrawer);
         }

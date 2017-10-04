@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fr.cdsm.leagueofesportv2.activity.ProfilActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/txt_team_profil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_pseudo"
+        android:layout_alignStart="@+id/txt_pseudo"
+        android:layout_below="@+id/txt_pseudo"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="150dp"
+        android:text="Team Préférée" />
+
+    <TextView
+        android:id="@+id/txt_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txt_team_profil"
+        android:layout_alignStart="@+id/txt_team_profil"
+        android:layout_below="@+id/txt_team_profil"
+        android:layout_marginTop="20dp"
+        android:text="Email" />
+
+    <Button
+        android:id="@+id/btn_disconnect"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="250dp"
+        android:text="Se Deconnecter" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_disconnect"
+        android:layout_alignBottom="@+id/btn_disconnect"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
+        android:text="Supprimer Compte" />
+
+
+</RelativeLayout>

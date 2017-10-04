@@ -51,32 +51,6 @@
             android:layout_marginRight="41dp"
             app:srcCompat="@drawable/fnatic_logo" />
 
-        <TextView
-            android:id="@+id/txt_winlose_team1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/img_result_team1"
-            android:layout_alignLeft="@+id/img_result_team1"
-            android:layout_alignRight="@+id/img_result_team1"
-            android:layout_alignStart="@+id/img_result_team1"
-            android:layout_below="@+id/img_result_team1"
-            android:layout_marginTop="14dp"
-            android:gravity="center_horizontal"
-            android:text="Vainqueur" />
-
-        <TextView
-            android:id="@+id/txt_winlose_team2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/txt_winlose_team1"
-            android:layout_alignBottom="@+id/txt_winlose_team1"
-            android:layout_alignEnd="@+id/img_result_team2"
-            android:layout_alignLeft="@+id/img_result_team2"
-            android:layout_alignRight="@+id/img_result_team2"
-            android:layout_alignStart="@+id/img_result_team2"
-            android:gravity="center_horizontal"
-            android:text="Perdant" />
-
     </RelativeLayout>
 
 </ScrollView>

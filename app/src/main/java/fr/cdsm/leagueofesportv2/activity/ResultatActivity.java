@@ -33,7 +33,6 @@ public class ResultatActivity extends AppCompatActivity {
     int test = 0;
     public int nombre_pages;
     String test1, test2;
-    int temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

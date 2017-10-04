@@ -1,5 +1,6 @@
 package fr.cdsm.leagueofesportv2.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -27,9 +29,9 @@ public class FragmentAuthentification extends android.app.Fragment {
 
     EditText mEmail, mPassword;
     String email, password;
-    private static final String TAG = "EmailPassword";
     private FirebaseAuth mAuth;
     public FirebaseUser user;
+    Button btn_inscription, btn_connexion, btn_password;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,7 +40,32 @@ public class FragmentAuthentification extends android.app.Fragment {
 
         mEmail = (EditText) rootView.findViewById(R.id.et_mail_auth);
         mPassword = (EditText) rootView.findViewById(R.id.et_password_auth);
+        btn_inscription = (Button) rootView.findViewById(R.id.btn_sub);
+        btn_connexion = (Button) rootView.findViewById(R.id.btn_auth);
+        btn_password = (Button) rootView.findViewById(R.id.btn_forgot);
 
+
+        btn_inscription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), InscriptionActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_connexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                connexionCompte(v);
+            }
+        });
+
+        btn_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                forgotPassword(v);
+            }
+        });
         return rootView;
     }
 
@@ -46,29 +73,32 @@ public class FragmentAuthentification extends android.app.Fragment {
         email = mEmail.getText().toString();
         password = mPassword.getText().toString();
 
-        if (email == null || password == null) {
+        if ("".equals(email) || "".equals(password)) {
             new MaterialDialog.Builder(getActivity())
-                    .title("Completions des champs nécéssaires")
+                    .title("Completion des champs nécéssaires")
                     .content("Afin de vous connecter voyez remplir les champs")
                     .positiveText("OK")
                     .show();
         } else {
-
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        //on envoye un message dans la console et on met à jour la variable utilisateur et on va a l'activité ProfilActivity
                         new MaterialDialog.Builder(getActivity())
                                 .title("Connexion au profil")
                                 .content("La connexion au profil est Réussi ! Profitez bien")
                                 .positiveText("OK")
+                                .dismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialog) {
+                                        user = mAuth.getCurrentUser();
+                                        goProfil(view);
+                                    }
+                                })
                                 .show();
-                        user = mAuth.getCurrentUser();
-                        goProfil(view);
 
                     } else {
-                        // Si c'est une erreur on affiche un message d'erreur dans la console et en Toast
+
                         new MaterialDialog.Builder(getActivity())
                                 .title("Connexion au profil")
                                 .content("La connexion au profil a Echouée ! Veuillez verifier vos identifiants et mot de passes")
@@ -99,6 +129,12 @@ public class FragmentAuthentification extends android.app.Fragment {
                                                     .content("Un mail vous a été envoyé pour réinitialiser votre mot de passe. Suivez les instructions et réessayez après.")
                                                     .positiveText("OK")
                                                     .show();
+                                        } else {
+                                            new MaterialDialog.Builder(getActivity())
+                                                    .title("Demande de réinitialisation de mot de passe")
+                                                    .content("Une erreur est survenue, veuillez nous excuser.")
+                                                    .positiveText("OK")
+                                                    .show();
                                         }
                                     }
                                 });
@@ -108,11 +144,6 @@ public class FragmentAuthentification extends android.app.Fragment {
 
     public void goProfil(View view) {
         Intent intent = new Intent(getActivity(), ProfilActivity.class);
-        startActivity(intent);
-    }
-
-    public void goInscription(View view) {
-        Intent intent = new Intent(getActivity(), InscriptionActivity.class);
         startActivity(intent);
     }
 }
